@@ -1,5 +1,4 @@
 'use strict';
-const img = React.createElement;
 
 class Image extends React.Component {
     constructor(props) {
@@ -19,12 +18,15 @@ class Image extends React.Component {
     }
 
     render(){
-            return img(
+            return (
+                <div>
                 <a href="this.state.img">
                 <img src="this.state.link"/>
-                </a>
+                 </a>
+                </div>
+
             )
         }
 }
 
-ReactDOM.render(img(Image), document.getElementById("app"));
+ReactDOM.render(<Image />, document.getElementById("app"));
