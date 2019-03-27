@@ -7,7 +7,7 @@ class Image extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://www.reddit.com/r/<%= title %>.json')
+        fetch('https://www.reddit.com/r/cats.json')
             .then(response => response.json())
             .then(post => this.setState({ author: post.data.author,
                 link: post.data.url,
