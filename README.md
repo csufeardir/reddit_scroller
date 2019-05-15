@@ -1,4 +1,9 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## npm install
+to install dependencies.
+
+## npm start
+to run the application on port 3000
+
 
 ## Available Scripts
 
