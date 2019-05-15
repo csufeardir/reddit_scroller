@@ -71,7 +71,7 @@ class App extends Component {
 
 
     updateInputValue = (evt) => {
-        this.setState({inputValue: 'http://www.reddit.com/r/'+evt.target.value+'.json'})
+        this.setState({inputValue: 'https://www.reddit.com/r/'+evt.target.value+'.json'})
     }
 
 
