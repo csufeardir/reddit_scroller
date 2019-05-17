@@ -34,7 +34,7 @@ With the new version, the corrections stated below are made:
 - Now each scroll guarantees you a number of images between 15-25
 - Gifs are also supported
 - If subreddit consists less than 2 images per page on average, scrolling will stop.
-- If you search a subreddit with no pictures, loading will stop after ~20 pages and average is calculated. You will see an error message.
+- If you search a subreddit with no pictures, loading will stop after 20 pages and average is calculated. This takes around ~8 seconds and you will see an error message.
 - If you exceed 500 pages, scrolling will stop.
 - Toggle switch added to include/exclude gifs.
 
