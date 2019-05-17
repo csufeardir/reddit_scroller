@@ -22,14 +22,15 @@ via address localhost:3000 on any browser.
 
 ## Current Bugs
 
-- The button that redirects you to the original post doesn't work. 
+- ~~The button that redirects you to the original post doesn't work. ~~
 - ~~-If the given subreddit has no pictures in one of its pages, fetching of new pictures stop there.~~ 
-- Fetching continues even when data flow is cut
+- ~~Fetching continues even when data flow is cut~~
 
 
-## Most Recent Update 
+## Most Recent Updates ~V.11 
 
 With the new version, the corrections stated below are made:
+- That god damn button should be fixed.
 - Now each scroll guarantees you a number of images between 15-25
 - Gifs are now also supported
 - If subreddit consists less than 2 images per page on average, scrolling will stop.
@@ -37,8 +38,8 @@ With the new version, the corrections stated below are made:
 
 ## Upcoming Features
 - Activate/Deactivate Button for gifs will be added
-- I will call somebody to fix that god damn button
 - Maybe a toolbar
+- Some optimization work
 
 ## Credits
 
