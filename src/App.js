@@ -24,8 +24,11 @@ class App extends Component {
     arr2 = [] // Array to store images before putting into state
     arr3 = [] // Array to store all posts' user IDs
     last;
+    last2;
     count = 0;
     scrollCount = 0;
+    scrollCountTotal =0;
+    fetchCounter = 0;
     reg = /.jpg$|.jpeg$|.png$|.gif$/
     //Run callReddit to Fetch JSON Data Right After Getting Subreddit URL
     callReddit = (subReddit) => {
@@ -44,15 +47,21 @@ class App extends Component {
                                 'perma': data.permalink,
                                 'id': data.id})
                         }
+                        //Compare last posts of last 2 pages
+                        if(this.fetchCounter%2===0)
                         this.last= this.arr3[this.arr3.length-1];
+                        else if(this.fetchCounter%2===1)
+                            this.last2=this.arr3[this.arr3.length-1]
+                        this.fetchCounter+=1;
+                        //
 
                         if((this.arr2.length-this.previousLength)>=15){
                             this.setState({images:this.arr2})
                             this.previousLength=this.arr2.length;
+                            this.scrollCount=0;
 
                         }else if((this.arr2.length-this.previousLength)<15 && !this.state.notManyPictures)
                             this.listenToScroll()
-
 
                     })
 
@@ -65,6 +74,7 @@ class App extends Component {
         this.arr2 = [];
         this.count = 0;
         this.scrollCount = 0;
+        this.scrollCountTotal=0;
         this.setState({images: [], subReddit:this.state.inputValue, notManyPictures:false}, ()=>
             this.callReddit(this.state.inputValue)
         )
@@ -73,15 +83,17 @@ class App extends Component {
 
 
     listenToScroll = () => {
-        if((this.scrollCount>=15 && this.arr2.length <=15) || this.scrollCount>=500){
-            this.setState({notManyPictures:true})
+        this.scrollCount += 1;
+        if((this.scrollCount>=21 && this.arr2.length-this.previousLength <=10) || this.scrollCountTotal>=500 ||
+            this.last===this.last2){
+            this.setState({notManyPictures:true, images:this.arr2})
         }
-
-
+        if(!this.state.notManyPictures){
+            var lastDecider = this.fetchCounter%2 ? this.last : this.last2
             this.count += 25;
-            this.scrollCount += 1;
-            this.callReddit(this.state.inputValue+'?count='+this.count+'&after=t3_'+this.last)
-
+            this.scrollCountTotal += 1;
+            this.callReddit(this.state.inputValue+'?count='+this.count+'&after=t3_'+lastDecider)
+        }
     }
 
     //Update Input
