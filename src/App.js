@@ -9,79 +9,87 @@ import Button from '@material-ui/core/Button';
 import Grid from "@material-ui/core/Grid";
 import BottomScrollListener from "react-bottom-scroll-listener";
 import Circular from "./components/Circular_Component/Circular"
-import Appbar from "./components/Appbar_Component/Appbar"
-import SimpleAppBar from "./components/SimpleAppBar_Component/SimpleAppBar"
+import Stop from "./components/Stop_Component/Stop"
 //
 //App Component
 class App extends Component {
     //Constructor and State
     constructor(props) {
         super(props);
-        this.state = { subReddit: "", images: [] , inputValue: ''};
+        this.state = { subReddit: "", images: [] , inputValue: '',  notManyPictures:true};
     }
-    //
 
-
+    //Define variables to determine number of images fetched
+    previousLength = 0; // Variable to store how many images are rendered on previous scroll
+    arr2 = [] // Array to store images before putting into state
+    arr3 = [] // Array to store all posts' user IDs
+    last;
+    count = 0;
+    scrollCount = 0;
+    reg = /.jpg$|.jpeg$|.png$|.gif$/
     //Run callReddit to Fetch JSON Data Right After Getting Subreddit URL
     callReddit = (subReddit) => {
         fetch(subReddit)
                     .then(res=>res.json())
                     .then(res=> {
-
-                        //Loop Through JSON and Set Image Data to State
                         for(var post in res.data.children){
                             let data = (res.data.children[post].data);
-                            if(data.url.endsWith('.jpg'||'.png'||'jpeg'))
-                            this.setState( prevState=> ({ images: [...prevState.images, {
+                            this.arr3.push(data.id)
+                            if(this.reg.test(data.url))
+                            this.arr2.push({
                                 'src': data.url,
-                                'href': data.url,
                                 'author': data.author,
                                 'img': data.thumbnail,
                                 'title': data.title,
-                                    'perma':data.permalink,
-                                    'id':data.id,
-                            }], count: 0 })),
-
-                                //After Setting Image Data, Render.
-                                function(){
-                                this.render();
-                            }}
+                                'perma': data.permalink,
+                                'id': data.id})
                         }
-                    )
+                        this.last= this.arr3[this.arr3.length-1];
 
-            }
+                        if((this.arr2.length-this.previousLength)>=15){
+                            this.setState({images:this.arr2})
+                            this.previousLength=this.arr2.length;
+
+                        }else if((this.arr2.length-this.previousLength)<15 && !this.state.notManyPictures)
+                            this.listenToScroll()
 
 
+                    })
 
-    //LifeCycle
-    componentDidMount() {
-     // this.callReddit(this.state.subReddit);
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.listenToScroll)
-    }
 
     //Functions
-    listenToScroll = () => {
-        var lastid = this.state.images[this.state.images.length-1].id
-        let count =+ this.state.count+25
-        this.callReddit(this.state.inputValue+'?count='+count+'&after=t3_'+lastid)
-    }
-
-
-    updateInputValue = (evt) => {
-        this.setState({inputValue: 'https://www.reddit.com/r/'+evt.target.value+'.json'})
-    }
-
-
-    //onClick Handler
     clickHandler = () => {
-        this.setState({images: [], subReddit:this.state.inputValue})
-        this.callReddit(this.state.inputValue)
-        console.log(this.state.images)
+        this.previousLength = 0;
+        this.arr2 = [];
+        this.count = 0;
+        this.scrollCount = 0;
+        this.setState({images: [], subReddit:this.state.inputValue, notManyPictures:false}, ()=>
+            this.callReddit(this.state.inputValue)
+        )
 
     }
+
+
+    listenToScroll = () => {
+        if((this.scrollCount>=15 && this.arr2.length <=15) || this.scrollCount>=500){
+            this.setState({notManyPictures:true})
+        }
+
+
+            this.count += 25;
+            this.scrollCount += 1;
+            this.callReddit(this.state.inputValue+'?count='+this.count+'&after=t3_'+this.last)
+
+    }
+
+    //Update Input
+    updateInputValue = (evt) => {
+        this.setState({inputValue: 'http://www.reddit.com/r/'+evt.target.value+'.json'})
+    }
+
+
 
     //Render
     render() {
@@ -102,8 +110,9 @@ class App extends Component {
     <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>
                 <div><br/></div><br/>
     <Image data={this.state.images}/>
+                { this.state.notManyPictures ? <Stop /> : null }
             </div>
-                <Circular/>
+                { !this.state.notManyPictures ? <Circular /> : null }
             </Grid>
 
         );
@@ -114,9 +123,10 @@ class App extends Component {
                            style={{width:"50%"}} val={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
                 <br/>
                 <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>
-                <Image data={this.state.images}/>
             </div></div>
         )
+
+
     }
 }
 //
