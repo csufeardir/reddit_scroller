@@ -10,13 +10,15 @@ import Grid from "@material-ui/core/Grid";
 import BottomScrollListener from "react-bottom-scroll-listener";
 import Circular from "./components/Circular_Component/Circular"
 import Stop from "./components/Stop_Component/Stop"
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 //
 //App Component
 class App extends Component {
     //Constructor and State
     constructor(props) {
         super(props);
-        this.state = { subReddit: "", images: [] , inputValue: '',  notManyPictures:true};
+        this.state = { subReddit: "", images: [] , inputValue: '',  notManyPictures:true, gifs:false};
     }
 
     //Define variables to determine number of images fetched
@@ -29,9 +31,15 @@ class App extends Component {
     scrollCount = 0;
     scrollCountTotal =0;
     fetchCounter = 0;
-    reg = /.jpg$|.jpeg$|.png$|.gif$/
+    reg;
+    reg1 = /.jpg$|.jpeg$|.png$|.gif$/
+    reg2 = /.jpg$|.jpeg$|.png$/
     //Run callReddit to Fetch JSON Data Right After Getting Subreddit URL
     callReddit = (subReddit) => {
+        if(this.state.gifs)
+            this.reg=this.reg1;
+        else
+            this.reg=this.reg2;
         fetch(subReddit)
                     .then(res=>res.json())
                     .then(res=> {
@@ -101,6 +109,15 @@ class App extends Component {
         this.setState({inputValue: 'https://www.reddit.com/r/'+evt.target.value+'.json'})
     }
 
+    switchHandler = () => {
+        if(!this.state.gifs)
+        this.setState({gifs:true},()=>this.clickHandler())
+        else
+            this.setState({gifs:false},()=>this.clickHandler())
+
+        console.log('switched')
+    }
+
 
 
     //Render
@@ -119,8 +136,13 @@ class App extends Component {
             <div className="App" style={{backgroundColor:'white'}} >
 
     <br/>
-    <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>
-                <div><br/></div><br/>
+    <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>&ensp;
+                <FormControlLabel control={                <Switch
+                    onChange={this.switchHandler}
+                    value="checkedA"
+                />} label='Gifs' />
+
+                <br/><br/>
     <Image data={this.state.images}/>
                 { this.state.notManyPictures ? <Stop /> : null }
             </div>
