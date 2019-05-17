@@ -59,7 +59,7 @@ class Image extends Component {
             }
                         action={
                             <IconButton >
-                                <a href={post.perma} style={{color:'inherit', textDecoration:'none'}}><LaunchIcon /></a>
+                                <a href={'https://www.reddit.com'+post.perma} style={{color:'inherit', textDecoration:'none'}}><LaunchIcon /></a>
                             </IconButton>
                         }
                         title={post.title}
