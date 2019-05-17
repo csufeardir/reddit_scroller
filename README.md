@@ -27,7 +27,7 @@ via address localhost:3000 on any browser.
 - ~~Fetching continues even when data flow is cut~~
 
 
-## Most Recent Updates ~V.11 
+## Most Recent Updates ~V.12 
 
 With the new version, the corrections stated below are made:
 - That one button should be fixed now.
@@ -35,9 +35,9 @@ With the new version, the corrections stated below are made:
 - Gifs are also supported
 - If subreddit consists less than 2 images per page on average, scrolling will stop.
 - If you exceed 500 pages, scrolling will stop.
+- Toggle switch added to include/exclude gifs.
 
 ## Upcoming Features
-- Activate/Deactivate Button for gifs will be added
 - Maybe a toolbar
 - Some optimization work
 
