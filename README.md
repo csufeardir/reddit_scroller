@@ -8,7 +8,7 @@ It uses React and Reddit's API as its main technologies. It's built in a respons
 Pretty simple: You type the subreddit and hit the "SCROLL!" button. This gives you the first page of that subreddit, and <br>
 more images get loaded as you keep scrolling down. The limit is your RAM.
 
-![ScrollReddit Page](https://imgur.com/n1bCVkZ.png)
+![ScrollReddit Page](https://imgur.com/VQhDK2B.png)
 
 ## Live Demo
 
