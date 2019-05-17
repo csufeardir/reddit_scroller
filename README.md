@@ -31,8 +31,8 @@ via address localhost:3000 on any browser.
 
 With the new version, the corrections stated below are made:
 - Now each scroll guarantees you a number of images between 15-25
-- Gifs are also supported
-- If subreddit consists less than 1 image per page for the first 15 pages, scrolling will stop.
+- Gifs are now also supported
+- If subreddit consists less than 2 images per page on average, scrolling will stop.
 - If you exceed 500 pages, scrolling will stop.
 
 ## Upcoming Features
