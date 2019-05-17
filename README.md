@@ -30,10 +30,11 @@ via address localhost:3000 on any browser.
 ## Most Recent Updates ~V.12 
 
 With the new version, the corrections stated below are made:
-- That one button should be fixed now.
+- Button linking to the original post is fixed.
 - Now each scroll guarantees you a number of images between 15-25
 - Gifs are also supported
 - If subreddit consists less than 2 images per page on average, scrolling will stop.
+- If you search a subreddit with no pictures, loading will stop after ~20 pages and average is calculated. You will see an error message.
 - If you exceed 500 pages, scrolling will stop.
 - Toggle switch added to include/exclude gifs.
 
