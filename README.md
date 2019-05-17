@@ -23,7 +23,7 @@ via address localhost:3000 on any browser.
 ## Current Bugs
 
 - The button that redirects you to the original post doesn't work. 
-~~-If the given subreddit has no pictures in one of its pages, fetching of new pictures stop there.~~ 
+- ~~-If the given subreddit has no pictures in one of its pages, fetching of new pictures stop there.~~ 
 - Fetching continues even when data flow is cut
 
 
