@@ -83,6 +83,8 @@ class App extends Component {
         this.count = 0;
         this.scrollCount = 0;
         this.scrollCountTotal=0;
+        this.last = '';
+        this.last2 = '';
         this.setState({images: [], subReddit:this.state.inputValue, notManyPictures:false}, ()=>
             this.callReddit(this.state.inputValue)
         )
@@ -139,7 +141,6 @@ class App extends Component {
     <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>&ensp;
                 <FormControlLabel control={                <Switch
                     onChange={this.switchHandler}
-                    value="checkedA"
                 />} label='Gifs' />
 
                 <br/><br/>
