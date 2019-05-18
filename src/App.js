@@ -128,6 +128,7 @@ class App extends Component {
         if (this.state.subReddit!=='') return (
             <div>
                 <AppBar/>
+                <br/><br/>
             <Grid
                 container
                 direction="column"
@@ -159,6 +160,7 @@ class App extends Component {
         if(this.state.subReddit==='') return(
             <div>
                 <AppBar/>
+                <br/><br/>
                 <div className="App" style={{backgroundColor:'white'}} >
                 <TextField variant="outlined" margin="normal" label="Subreddit" placeholder={this.state.subReddit}
                            style={{width:"50%"}} val={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
