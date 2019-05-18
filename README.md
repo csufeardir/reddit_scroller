@@ -27,7 +27,7 @@ via address localhost:3000 on any browser.
 - ~~Fetching continues even when data flow is cut~~
 
 
-## Most Recent Updates ~V.12 
+## Most Recent Updates ~V.15 
 
 With the new version, the corrections stated below are made:
 - Button linking to the original post is fixed.
@@ -37,9 +37,9 @@ With the new version, the corrections stated below are made:
 - If you search a subreddit with no pictures, loading will stop after 20 pages and average is calculated. This takes around ~10 seconds and you will see an error message.
 - For now the limit is 500 pages, upon exceeding scrolling will stop.
 - Toggle switch added to include/exclude gifs.
+- Transparent toolbar with menu added
 
-## Upcoming Features
-- Maybe a toolbar
+## Next Update
 - Some optimization work
 
 ## Credits
