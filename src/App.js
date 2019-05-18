@@ -12,6 +12,7 @@ import Circular from "./components/Circular_Component/Circular"
 import Stop from "./components/Stop_Component/Stop"
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import AppBar from './components/Appbar_Component/Appbar'
 //
 //App Component
 class App extends Component {
@@ -125,7 +126,8 @@ class App extends Component {
     //Render
     render() {
         if (this.state.subReddit!=='') return (
-
+            <div>
+                <AppBar/>
             <Grid
                 container
                 direction="column"
@@ -145,15 +147,19 @@ class App extends Component {
 
                 <br/><br/>
     <Image data={this.state.images}/>
-                { this.state.notManyPictures ? <Stop /> : null }
+
             </div>
                 { !this.state.notManyPictures ? <Circular /> : null }
             </Grid>
+                <center>{ this.state.notManyPictures ? <Stop /> : null }</center>
+            </div>
 
         );
 
         if(this.state.subReddit==='') return(
-            <div> <div className="App" style={{backgroundColor:'white'}} >
+            <div>
+                <AppBar/>
+                <div className="App" style={{backgroundColor:'white'}} >
                 <TextField variant="outlined" margin="normal" label="Subreddit" placeholder={this.state.subReddit}
                            style={{width:"50%"}} val={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
                 <br/>
