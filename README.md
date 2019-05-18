@@ -39,7 +39,8 @@ With the new version, the corrections stated below are made:
 - Toggle switch added to include/exclude gifs.
 - Transparent toolbar with menu added
 
-## Next Update
+## Upcoming Features
+- Perhaps another toggle button for regular posts beside images.
 - Some optimization work
 
 ## Credits
