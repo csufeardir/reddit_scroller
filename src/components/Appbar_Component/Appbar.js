@@ -31,7 +31,7 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className='AppBar' style={{background: 'transparent', boxShadow: 'none'}}>
+      <AppBar position="fixed" className='AppBar' style={{background: 'white', boxShadow: 'none'}}>
         <Toolbar>
             <Menu/>
           <Typography variant="h6" color="black" className={classes.grow}>
