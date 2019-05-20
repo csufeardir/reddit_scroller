@@ -1,6 +1,6 @@
 {
   "name": "redditscroller",
-  "version": "1.18",
+  "version": "0.1.0",
   "private": true,
   "engines": {
     "node": "10.15.3"
