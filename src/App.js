@@ -129,7 +129,7 @@ class App extends Component {
 
     //Render
     render() {
-        return (
+       if (this.state.subReddit!=="") return (
             <div>
                 <AppBar/>
                 <br/><br/><br/>
@@ -146,20 +146,43 @@ class App extends Component {
 
     <br/>
     <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>&ensp;
-                {this.state.subReddit!=="" ? <FormControlLabel control={                <Switch
+                <FormControlLabel control={
+                    <Switch
                     onChange={this.switchHandler}
-                />} label='Gifs' />
-                : null }
+                />
+                }label='Gifs' />
                 <br/><br/>
     <Image data={this.state.images}/>
 
             </div>
                 { !this.state.notManyPictures ? <Circular /> : null }
             </Grid>
-                <center>{ (this.state.notManyPictures&&this.state.subReddit!=="") ? <Stop /> : null }</center>
+                <center>{ (this.state.notManyPictures) ? <Stop /> : null }</center>
             </div>
 
         );
+
+       if(this.state.subReddit==="") return(
+           <div>
+               <AppBar/>
+               <br/><br/><br/>
+               <Grid
+                   container
+                   direction="column"
+                   alignItems="center"
+                   justify="center"
+               >
+                   <TextField variant="outlined" margin="normal" label="Subreddit" placeholder='Subreddit'
+                              style={{width:"50%"}} val={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
+                   <BottomScrollListener onBottom={this.listenToScroll} />
+                   <div className="App" style={{backgroundColor:'white'}} >
+
+                       <br/>
+                       <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>&ensp;
+                   </div>
+               </Grid>
+           </div>
+       )
 
     }
 }
