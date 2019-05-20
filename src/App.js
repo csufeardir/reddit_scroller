@@ -14,6 +14,7 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import AppBar from './components/Appbar_Component/Appbar'
 //
+
 //App Component
 class App extends Component {
     //Constructor and State
@@ -21,21 +22,22 @@ class App extends Component {
         super(props);
         this.state = { subReddit: "", images: [] , inputValue: '',  notManyPictures:true, gifs:false};
     }
-
+    //
     //Define variables to determine number of images fetched
-    previousLength = 0; // Variable to store how many images are rendered on previous scroll
-    arr2 = [] // Array to store images before putting into state
-    arr3 = [] // Array to store all posts' user IDs
-    last;
-    last2;
-    count = 0;
-    scrollCount = 0;
-    scrollCountTotal =0;
-    fetchCounter = 0;
-    reg;
-    reg1 = /.jpg$|.jpeg$|.png$|.gif$/
-    reg2 = /.jpg$|.jpeg$|.png$/
-    //Run callReddit to Fetch JSON Data Right After Getting Subreddit URL
+    previousLength = 0;                 //How many images found in previous scroll
+    arr2 = []                           //Array to store images before putting into state
+    arr3 = []                           //Array to store all posts' user IDs
+    last;                               //ID of last post in the last-1 page
+    last2;                              //ID of last post in the last page
+    count = 0;                          //Number to request new pages
+    scrollCount = 0;                    //How many scrolls to get min. 15 images
+    scrollCountTotal =0;                //How many scrolls in one subreddit
+    fetchCounter = 0;                   //How many fetches has been done
+    reg;                                //Reg to use
+    reg1 = /.jpg$|.jpeg$|.png$|.gif$/   //Reg including gifs
+    reg2 = /.jpg$|.jpeg$|.png$/         //Reg excluding gifs
+
+    //Fetch JSON Data After Getting Subreddit URL
     callReddit = (subReddit) => {
         if(this.state.gifs)
             this.reg=this.reg1;
@@ -63,7 +65,7 @@ class App extends Component {
                             this.last2=this.arr3[this.arr3.length-1]
                         this.fetchCounter+=1;
                         //
-
+                        //Get a minimum of 15 images per scroll
                         if((this.arr2.length-this.previousLength)>=15){
                             this.setState({images:this.arr2})
                             this.previousLength=this.arr2.length;
@@ -71,6 +73,7 @@ class App extends Component {
 
                         }else if((this.arr2.length-this.previousLength)<15 && !this.state.notManyPictures)
                             this.listenToScroll()
+                        //
 
                     })
 
@@ -78,6 +81,7 @@ class App extends Component {
 
 
     //Functions
+    //Reset everything to default and Fetch again
     clickHandler = () => {
         this.previousLength = 0;
         this.arr2 = [];
@@ -89,10 +93,9 @@ class App extends Component {
         this.setState({images: [], subReddit:this.state.inputValue, notManyPictures:false}, ()=>
             this.callReddit(this.state.inputValue)
         )
-
     }
-
-
+    //
+    //Get new images when scrolled to bottom
     listenToScroll = () => {
         this.scrollCount += 1;
         if((this.scrollCount>=21 && this.arr2.length-this.previousLength <=10) || this.scrollCountTotal>=500 ||
@@ -106,12 +109,13 @@ class App extends Component {
             this.callReddit(this.state.inputValue+'?count='+this.count+'&after=t3_'+lastDecider)
         }
     }
-
+    //
     //Update Input
     updateInputValue = (evt) => {
         this.setState({inputValue: 'https://www.reddit.com/r/'+evt.target.value+'.json'})
     }
-
+    //
+    //Change state to include/exclude gifs
     switchHandler = () => {
         if(!this.state.gifs)
         this.setState({gifs:true},()=>this.clickHandler())
@@ -120,12 +124,12 @@ class App extends Component {
 
         console.log('switched')
     }
-
+    //
 
 
     //Render
     render() {
-        if (this.state.subReddit!=='') return (
+        return (
             <div>
                 <AppBar/>
                 <br/><br/><br/>
@@ -152,23 +156,10 @@ class App extends Component {
             </div>
                 { !this.state.notManyPictures ? <Circular /> : null }
             </Grid>
-                <center>{ this.state.notManyPictures ? <Stop /> : null }</center>
+                <center>{ (this.state.notManyPictures&&this.state.subReddit!=="") ? <Stop /> : null }</center>
             </div>
 
         );
-
-        if(this.state.subReddit==='') return(
-            <div>
-                <AppBar/>
-                <br/><br/><br/>
-                <div className="App" style={{backgroundColor:'white'}} >
-                <TextField variant="outlined" margin="normal" label="Subreddit" placeholder={this.state.subReddit}
-                           style={{width:"50%"}} val={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
-                <br/>
-                <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>
-            </div></div>
-        )
-
 
     }
 }
