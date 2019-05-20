@@ -146,10 +146,10 @@ class App extends Component {
 
     <br/>
     <Button variant="outlined" color="secondary" onClick={this.clickHandler}>Scroll!</Button>&ensp;
-                <FormControlLabel control={                <Switch
+                {this.state.subReddit!=="" ? <FormControlLabel control={                <Switch
                     onChange={this.switchHandler}
                 />} label='Gifs' />
-
+                : null }
                 <br/><br/>
     <Image data={this.state.images}/>
 
