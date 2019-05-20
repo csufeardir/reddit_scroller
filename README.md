@@ -25,9 +25,10 @@ via address localhost:3000 on any browser.
 - ~~The button that redirects you to the original post doesn't work.~~
 - ~~-If the given subreddit has no pictures in one of its pages, fetching of new pictures stop there.~~ 
 - ~~Fetching continues even when data flow is cut~~
+- Google Chrome's mobile browser sometimes creates problems with scrolling. I don't know the reason yet but probably a security measure.
 
 
-## Most Recent Updates ~V.17 
+## Most Recent Updates ~V.21 
 
 With the new version, the corrections stated below are made:
 - Button linking to the original post is fixed.
