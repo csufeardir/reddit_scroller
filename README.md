@@ -40,10 +40,6 @@ With the new version, the corrections stated below are made:
 - Toggle switch added to include/exclude gifs.
 - Toolbar with menu added
 
-## Upcoming Features
-- Perhaps another toggle button for regular posts beside images.
-- Some optimization work
-
 ## Credits
 
 - To Twitter, and flaticon.com for the icon used.
