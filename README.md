@@ -28,7 +28,7 @@ via address localhost:3000 on any browser.
 - Google Chrome's mobile browser sometimes creates problems with scrolling. I don't know the reason yet but probably a security measure.
 
 
-## Most Recent Updates ~V.21 
+## Most Recent Updates ~V1.21 
 
 With the new version, the corrections stated below are made:
 - Button linking to the original post is fixed.
