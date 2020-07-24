@@ -43,6 +43,5 @@ With the new version, the corrections stated below are made:
 ## Credits
 
 - To Twitter, and flaticon.com for the icon used.
-- Scrolller.com and its developer Simoen Owesen-Lein for the advices regarding development. 
 - Lity is used for lightboxes, from https://sorgalla.com/lity/
 - Google's MaterialUI is used for the UI development.
